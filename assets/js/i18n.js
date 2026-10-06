@@ -14,10 +14,13 @@ function toggleLang(){
 function updateStaticText(){
   $("search").placeholder = t("Search for a dish or juice…", "ابحث عن طبق أو عصير…");
   document.querySelector(".sectionHead h2").innerHTML = t("Our <em>Menu</em>", "قائمتنا");
-  document.querySelector(".hero p").textContent = t(
-    "Where every dish tells a story. Order fresh, delivered warm.",
-    "حيث يحكي كل طبق قصة. اطلب طازجًا، يوصل ساخنًا."
+const heroSubEl = document.querySelector(".heroSub");
+if (heroSubEl) {
+  heroSubEl.textContent = t(
+    "Bab Al Khair · Authentic oriental cuisine, delivered fresh to your door.",
+    "باب الخير · مأكولات شرقية أصيلة، تُوصَّل طازجة إلى بابك."
   );
+}
   $("locBtnText").textContent = userLocation
     ? t("Location set ✓","تم تحديد الموقع ✓")
     : t("Use my precise location","استخدم موقعي الدقيق");
