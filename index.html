@@ -252,7 +252,42 @@
   <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>
   <span id="toastText">Added to cart</span>
 </div>
+<!-- ============ WELCOME OVERLAY ============ -->
+<div id="welcomeOverlay" class="welcome-overlay">
+  <div class="welcomePattern"></div>
 
+  <div class="welcomeContent">
+    <div class="welcomeCalligraphy">
+      <svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="welcomeGold" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#8a5a30"/>
+            <stop offset="50%" stop-color="#ffd76e"/>
+            <stop offset="100%" stop-color="#8a5a30"/>
+          </linearGradient>
+        </defs>
+        <text x="150" y="70" text-anchor="middle" font-family="Cairo, serif" font-weight="900" font-size="56" fill="url(#welcomeGold)">أهلاً وسهلاً</text>
+      </svg>
+    </div>
+
+    <div class="welcomeLogo">
+      <img src="logo.jpg" alt="Bab Al Khair">
+    </div>
+
+    <div class="welcomeTitle" id="welcomeTitle">WELCOME</div>
+    <div class="welcomeSubtitle" id="welcomeSubtitle">BAB AL KHAIR</div>
+
+    <div class="welcomeDivider">
+      <span></span>
+      <span class="welcomeStar">✦</span>
+      <span></span>
+    </div>
+
+    <div class="welcomeMessage" id="welcomeMessage">
+      Delicious Food · Great Moments
+    </div>
+  </div>
+</div>
 <!-- ============ SCRIPTS ============ -->
 <script src="assets/js/data.js"></script>
 <script src="assets/js/state.js"></script>
