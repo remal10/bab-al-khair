@@ -14,6 +14,12 @@ function changeQty(id, d){
   updateCart();
 }
 
+function removeItem(id) {
+  delete cart[id];
+  saveCart();
+  updateCart();
+}
+
 function saveCart(){ localStorage.setItem("bak_cart", JSON.stringify(cart)); }
 
 function updateCart(pulse){
@@ -21,6 +27,13 @@ function updateCart(pulse){
   const badge = $("count");
   badge.textContent = count;
   if(pulse){ badge.classList.remove("pulse"); void badge.offsetWidth; badge.classList.add("pulse"); }
+
+  // Sync badge dans bottom nav
+  const navBadge = $("navBadge");
+  if (navBadge) {
+    navBadge.textContent = count;
+    navBadge.style.display = count > 0 ? 'inline-flex' : 'none';
+  }
 
   const keys = Object.keys(cart);
   const items = $("cartItems");
@@ -48,22 +61,37 @@ function updateCart(pulse){
     total += sub;
     return `
       <div class="line">
-        <div>
+        <img class="lineImg" src="${a.img}" alt="${name}">
+        <div class="lineInfo">
           <div class="lname">${name}</div>
-          <div class="lprice">${a.price} AED × ${qty} = ${sub} AED</div>
+          <div class="lprice">${a.price} AED</div>
+          <div class="qty">
+            <button onclick="changeQty(${id},-1)">−</button>
+            <span>${qty}</span>
+            <button onclick="changeQty(${id},+1)">+</button>
+          </div>
         </div>
-        <div class="qty">
-          <button onclick="changeQty(${id},-1)">−</button>
-          <span>${qty}</span>
-          <button onclick="changeQty(${id},+1)">+</button>
-        </div>
+        <button class="lineRemove" onclick="removeItem(${id})">✕</button>
       </div>`;
   }).join("");
 
+  const deliveryFee = 0;
+  const finalTotal = total + deliveryFee;
+
   items.innerHTML += `
-    <div class="grandTotal">
-      <span>${t("Total","المجموع")}</span>
-      <span>${total} <small>AED</small></span>
+    <div class="cartSummary">
+      <div class="summaryRow">
+        <span>${t("Subtotal","المجموع الفرعي")}</span>
+        <span>${total.toFixed(2)} AED</span>
+      </div>
+      <div class="summaryRow">
+        <span>${t("Delivery Fee","رسوم التوصيل")}</span>
+        <span>${deliveryFee.toFixed(2)} AED</span>
+      </div>
+      <div class="summaryRow total">
+        <span>${t("Total","المجموع")}</span>
+        <span>${finalTotal.toFixed(2)} <small>AED</small></span>
+      </div>
     </div>`;
 
   $("cartQty").textContent = `${count} ${t("items","عنصر")}`;
