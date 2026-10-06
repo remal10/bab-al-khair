@@ -77,4 +77,17 @@ function setLocStatus(type, msg){
 }
 
 /* ===================== SAVE / RESTORE ADDRESS ===================== */
-const ADDR_FIELDS =
+const ADDR_FIELDS = ["building","apt","landmark","phone"];
+
+function saveAddress(){
+  const data = {};
+  ADDR_FIELDS.forEach(id => { const el = $(id); if(el) data[id] = el.value; });
+  localStorage.setItem("bak_address", JSON.stringify(data));
+}
+
+function restoreAddress(){
+  try{
+    const data = JSON.parse(localStorage.getItem("bak_address") || "{}");
+    ADDR_FIELDS.forEach(id => { const el = $(id); if(el && data[id]) el.value = data[id]; });
+  }catch(e){}
+}
