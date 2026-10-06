@@ -1,14 +1,12 @@
 /* ===================== UI : Chips + Grid + Modal ===================== */
 
 function renderChips(){
-  // ✨ Met à jour la localisation dans le header
   const locBtn = document.querySelector('.location-btn span');
   if (locBtn) locBtn.textContent = getLocationText('short');
 
-  // ✨ Met à jour le titre de la section
   const sectionTitle = document.querySelector('.sectionHead h2');
   if (sectionTitle) {
-    sectionTitle.innerHTML = lang === 'ar' ? 'قائمتنا' : 'Our <em>Menu</em>';
+    sectionTitle.innerHTML = lang === 'ar' ? 'قائمتنا المميزة' : 'Popular <em>Items</em>';
   }
 
   $("catsGrid").innerHTML = CATS.map(c => {
@@ -19,6 +17,7 @@ function renderChips(){
         <div class="catCardImg">
           <img src="${c.img}" alt="${label}" loading="lazy">
           <div class="catCardOverlay"></div>
+          <div class="catCardBorder"></div>
         </div>
         <span class="catCardLabel">${label}</span>
       </button>`;
