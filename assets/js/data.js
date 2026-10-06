@@ -34,11 +34,11 @@ const ARTICLES = [
 ];
 
 const CATS = [
-  {id:"All",      en:"All",      ar:"الكل"},
-  {id:"Dishes",   en:"Dishes",   ar:"الأطباق"},
-  {id:"Juices",   en:"Juices",   ar:"العصائر"},
-  {id:"Starters", en:"Starters", ar:"المقبلات"},
-  {id:"Desserts", en:"Desserts", ar:"الحلويات"},
+  {id:"All",      en:"All",                 ar:"الكل",              img:"https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=80"},
+  {id:"Dishes",   en:"Chicken Cuisine",     ar:"الأطباق",            img:"https://images.unsplash.com/photo-1596797038530-2c107229654b?w=400&q=80"},
+  {id:"Juices",   en:"Fresh Juices",        ar:"العصائر",            img:"https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&q=80"},
+  {id:"Starters", en:"Soups & Salads",      ar:"المقبلات",           img:"https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&q=80"},
+  {id:"Desserts", en:"Desserts",            ar:"الحلويات",           img:"https://images.unsplash.com/photo-1579372786545-d24232daf58c?w=400&q=80"},
 ];
 
 const WHATSAPP = "971561314938";
