@@ -33,7 +33,32 @@ function playWelcomeSound() {
 
 window.addEventListener("load", () => {
   const loader = $("loader");
+/* ═══════════════════════════════════════════════════════════
+   ✨ WELCOME TOAST — apparaît après 1ère interaction
+   ═══════════════════════════════════════════════════════════ */
 
+let welcomeShown = false;
+
+function showWelcomeOnce() {
+  if (welcomeShown) return;
+  welcomeShown = true;
+
+  setTimeout(() => {
+    const loc = (typeof RESTAURANT_LOCATION !== 'undefined')
+      ? (RESTAURANT_LOCATION[lang] || RESTAURANT_LOCATION.en)
+      : { short: 'Al Dhana' };
+
+    showToast(t(
+      `Welcome to Bab Al Khair · ${loc.short}`,
+      `أهلاً بك في باب الخير · ${loc.short}`
+    ));
+  }, 800);
+}
+
+// Déclenche après la 1ère interaction utilisateur UNIQUEMENT
+// → Ne bloque JAMAIS la bottom nav au chargement
+document.addEventListener('click', showWelcomeOnce, { once: true });
+document.addEventListener('touchstart', showWelcomeOnce, { once: true });
   // Essayer de jouer immédiatement
   playWelcomeSound();
 
