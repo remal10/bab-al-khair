@@ -740,6 +740,19 @@ body.rtl{font-family:'Cairo','Inter',sans-serif}
 }
 .toast.show{transform:translateX(-50%) translateY(0)}
 .toast svg{width:18px;height:18px;stroke:var(--gold);fill:none;flex-shrink:0}
+/* ═══════════════════════════════════════════════════════════
+   ✨ WELCOME TOAST — Position HAUT (ne touche PAS la nav)
+   ═══════════════════════════════════════════════════════════ */
+
+.toast.welcome {
+  bottom: auto !important;
+  top: 100px !important;
+  transform: translateX(-50%) translateY(-120px);
+}
+
+.toast.welcome.show {
+  transform: translateX(-50%) translateY(0);
+}
 
 /* ============ FOOTER ============ */
 .footer{
