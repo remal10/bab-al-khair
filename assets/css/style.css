@@ -1101,3 +1101,147 @@ body.rtl{font-family:'Cairo','Inter',sans-serif}
     font-size: 11px;
   }
 }
+/* ═══════════════════════════════════════════════════════════
+   ✨ PATCH 2 — Hero oriental immersif
+   ═══════════════════════════════════════════════════════════ */
+
+.hero {
+  position: relative;
+  margin: 16px;
+  border-radius: 28px;
+  overflow: hidden;
+  min-height: 340px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  isolation: isolate;
+}
+
+.hero img {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  transform: scale(1.05);
+  transition: transform 8s ease;
+}
+
+.hero:hover img {
+  transform: scale(1.12);
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(13, 6, 3, 0.2) 0%,
+    rgba(13, 6, 3, 0.5) 40%,
+    rgba(13, 6, 3, 0.95) 85%,
+    rgba(13, 6, 3, 1) 100%
+  );
+  z-index: 1;
+}
+
+.heroText {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: 28px 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+/* ─── Calligraphie arabe ─── */
+.heroCalligraphy {
+  margin-bottom: 8px;
+  filter: drop-shadow(0 4px 20px rgba(242, 182, 50, 0.4));
+  animation: floatCal 4s ease-in-out infinite;
+}
+
+.heroCalligraphy svg {
+  width: 160px;
+  height: auto;
+  display: block;
+}
+
+@keyframes floatCal {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* ─── Titre anglais ─── */
+.heroTitleEn {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  line-height: 1.05;
+  font-weight: 900;
+  color: var(--cream);
+  margin: 4px 0 10px;
+  letter-spacing: -0.5px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+}
+
+.heroTitleEn em {
+  color: var(--gold);
+  font-style: italic;
+  background: linear-gradient(135deg, #ffd76e, #f2b632);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Sous-titre ─── */
+.heroSub {
+  color: #e8d8c2;
+  font-size: 12.5px;
+  line-height: 1.5;
+  max-width: 90%;
+  opacity: 0.9;
+}
+
+/* ─── Tag oriental ─── */
+.hero .tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(242, 182, 50, 0.16);
+  border: 1px solid rgba(242, 182, 50, 0.4);
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 99px;
+  margin-bottom: 12px;
+  width: fit-content;
+  backdrop-filter: blur(8px);
+}
+
+/* ─── Coins décoratifs arabesques ─── */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  border: 1px solid rgba(242, 182, 50, 0.15);
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 2;
+  mask-image:
+    linear-gradient(to right, black 30%, transparent 30%, transparent 70%, black 70%),
+    linear-gradient(to bottom, black 30%, transparent 30%, transparent 70%, black 70%);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+}
+
+@media (max-width: 420px) {
+  .heroTitleEn {
+    font-size: 28px;
+  }
+  .heroCalligraphy svg {
+    width: 130px;
+  }
+}
