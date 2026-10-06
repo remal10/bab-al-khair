@@ -34,11 +34,11 @@ const ARTICLES = [
 ];
 
 const CATS = [
-  {id:"All",      en:"All",                 ar:"الكل",              img:"https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=80"},
-  {id:"Dishes",   en:"Chicken Cuisine",     ar:"الأطباق",            img:"https://images.unsplash.com/photo-1596797038530-2c107229654b?w=400&q=80"},
-  {id:"Juices",   en:"Fresh Juices",        ar:"العصائر",            img:"https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&q=80"},
-  {id:"Starters", en:"Soups & Salads",      ar:"المقبلات",           img:"https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&q=80"},
-  {id:"Desserts", en:"Desserts",            ar:"الحلويات",           img:"https://images.unsplash.com/photo-1579372786545-d24232daf58c?w=400&q=80"},
+  {id:"All",         en:"All Specialties",  ar:"جميع الأطباق",   img:"https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80"},
+  {id:"Dishes",      en:"Mandi & Kabsa",    ar:"مندي وكبسة",     img:"https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=600&q=80"},
+  {id:"Grills",      en:"Mixed Grills",     ar:"المشاوي",         img:"https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80"},
+  {id:"Juices",      en:"Fresh Juices",     ar:"العصائر الطازجة", img:"https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=600&q=80"},
+  {id:"Starters",    en:"Mezze & Starters", ar:"المقبلات",        img:"https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&q=80"},
+  {id:"Desserts",    en:"Oriental Sweets",  ar:"الحلويات الشرقية", img:"https://images.unsplash.com/photo-1579372786545-d24232daf58c?w=600&q=80"},
 ];
-
 const WHATSAPP = "971561314938";
