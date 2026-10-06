@@ -760,3 +760,16 @@ body.rtl{font-family:'Cairo','Inter',sans-serif}
   .brandCenterTitle{font-size:12px}
   .brandLogo{width:36px;height:36px}
 }
+/* ═══════════════════════════════════════════════════════════
+   ✨ WELCOME TOAST — Position HAUT (ne touche PAS la bottom nav)
+   ═══════════════════════════════════════════════════════════ */
+
+.toast.welcome {
+  bottom: auto;
+  top: 80px;
+  transform: translateX(-50%) translateY(-120px);
+}
+
+.toast.welcome.show {
+  transform: translateX(-50%) translateY(0);
+}
