@@ -14,11 +14,40 @@
 
 <!-- ============ LOADER ============ -->
 <div id="loader">
-  <img class="loaderLogo" src="logo.jpg" alt="Bab Al Khair">
-  <div class="loaderBar"></div>
-  <div class="loaderText">Preparing the table…</div>
-</div>
+  <div class="loaderPattern"></div>
 
+  <div class="loaderContent">
+    <!-- Calligraphie arabe -->
+    <div class="loaderCalligraphy">
+      <svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="loaderGold" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#8a5a30"/>
+            <stop offset="50%" stop-color="#ffd76e"/>
+            <stop offset="100%" stop-color="#8a5a30"/>
+          </linearGradient>
+        </defs>
+        <text x="150" y="70" text-anchor="middle" font-family="Cairo, serif" font-weight="900" font-size="58" fill="url(#loaderGold)">باب الخير</text>
+      </svg>
+    </div>
+
+    <!-- Logo -->
+    <img class="loaderLogo" src="logo.jpg" alt="Bab Al Khair">
+
+    <!-- Nom -->
+    <div class="loaderTitle">BAB AL KHAIR</div>
+    <div class="loaderSub">RESTAURANT</div>
+
+    <!-- Séparateur -->
+    <div class="loaderDivider">✦</div>
+
+    <!-- Barre de progression -->
+    <div class="loaderBar"><div class="loaderBarFill"></div></div>
+    <div class="loaderText">Preparing the table…</div>
+  </div>
+
+  <audio id="welcomeSound" src="assets/audio/welcome.mp3" preload="auto"></audio>
+</div>
 <div class="app">
 
   <!-- ============ HEADER ============ -->
