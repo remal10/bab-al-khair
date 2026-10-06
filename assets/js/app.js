@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   BAB AL KHAIR — App Init + Toast + Transition + Welcome
+   BAB AL KHAIR — App Init + Toast + Transition + Welcome Overlay
    ═══════════════════════════════════════════════════════════ */
 
 /* ===================== TOAST ===================== */
@@ -88,50 +88,75 @@ function switchTab(tab) {
   } else if (tab === 'contact') {
     const loc = (typeof RESTAURANT_LOCATION !== 'undefined')
       ? (RESTAURANT_LOCATION[lang] || RESTAURANT_LOCATION.en)
-      : { full: 'Al Dhana · Adnoc Housing · West Market', country: 'U.A.E' };
+      : { full: 'Al Dhana · Adnoc Housing · West Market', country: 'U.AE' };
     showToast(`${loc.full} · ${loc.country}`);
   }
 }
 
-/* ===================== WELCOME TOAST (EN HAUT) ===================== */
-/* ✨ Apparaît UNIQUEMENT après la 1ère interaction utilisateur
-   → EN HAUT de l'écran (classe "welcome")
-   → Ne touche JAMAIS la bottom nav */
+/* ═══════════════════════════════════════════════════════════
+   ✨ WELCOME OVERLAY PREMIUM ORIENTAL
+   S'affiche une seule fois après la 1ère interaction
+   Fade in → reste 3s → fade out → disparaît complètement
+   Ne bloque JAMAIS la bottom nav
+   ═══════════════════════════════════════════════════════════ */
 
 let welcomeShown = false;
 
-function showWelcomeOnce() {
+function showWelcomeOverlay() {
   if (welcomeShown) return;
   welcomeShown = true;
 
+  const overlay = $("welcomeOverlay");
+  if (!overlay) return;
+
+  // Textes bilingues selon la langue actuelle
+  const isAr = (lang === "ar");
+
+  const title = $("welcomeTitle");
+  const subtitle = $("welcomeSubtitle");
+  const message = $("welcomeMessage");
+
+  if (title) {
+    title.textContent = isAr ? "أهلاً وسهلاً" : "WELCOME";
+    if (isAr) title.style.fontSize = "36px";
+  }
+  if (subtitle) {
+    subtitle.textContent = isAr ? "باب الخير · مطعم" : "BAB AL KHAIR · RESTAURANT";
+  }
+  if (message) {
+    message.textContent = isAr
+      ? "طعام لذيذ · لحظات رائعة"
+      : "Delicious Food · Great Moments";
+  }
+
+  // Affiche l'overlay
+  overlay.classList.remove("hide");
+  overlay.classList.add("show");
+
+  // Attend 3 secondes → fade out
   setTimeout(() => {
-    const loc = (typeof RESTAURANT_LOCATION !== 'undefined')
-      ? (RESTAURANT_LOCATION[lang] || RESTAURANT_LOCATION.en)
-      : { short: 'Al Dhana' };
+    overlay.classList.remove("show");
+    overlay.classList.add("hide");
 
-    const el = $("toast");
-    if (!el) return;
-
-    // Position HAUT pour le welcome
-    el.classList.add("welcome");
-    $("toastText").textContent = t(
-      `Welcome to Bab Al Khair · ${loc.short}`,
-      `أهلاً بك في باب الخير · ${loc.short}`
-    );
-    el.classList.add("show");
-
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => {
-      el.classList.remove("show");
-      // Retirer "welcome" après disparition
-      setTimeout(() => el.classList.remove("welcome"), 400);
-    }, 2600);
-  }, 800);
+    // Après fade out → cache complètement
+    setTimeout(() => {
+      overlay.style.display = "none";
+    }, 900);
+  }, 3000);
 }
 
-// Déclenche après la 1ère interaction utilisateur UNIQUEMENT
-document.addEventListener('click', showWelcomeOnce, { once: true });
-document.addEventListener('touchstart', showWelcomeOnce, { once: true });
+// Déclenche UNIQUEMENT après la 1ère interaction utilisateur
+document.addEventListener('click', showWelcomeOverlay, { once: true });
+document.addEventListener('touchstart', showWelcomeOverlay, { once: true });
+
+// Fallback : si aucune interaction, afficher après 5s
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    if (!welcomeShown) {
+      showWelcomeOverlay();
+    }
+  }, 5000);
+});
 
 /* ===================== INIT ===================== */
 
