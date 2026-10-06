@@ -736,6 +736,7 @@ body.rtl{font-family:'Cairo','Inter',sans-serif}
   z-index:200;transition:transform .4s cubic-bezier(.2,.9,.3,1.4);
   border:1px solid var(--line);
   display:flex;align-items:center;gap:10px;max-width:90vw;
+  pointer-events:none;       /* ✅ AJOUT : ne bloque PAS les clics */
 }
 .toast.show{transform:translateX(-50%) translateY(0)}
 .toast svg{width:18px;height:18px;stroke:var(--gold);fill:none;flex-shrink:0}
