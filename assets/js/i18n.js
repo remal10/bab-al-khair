@@ -23,3 +23,27 @@ function updateStaticText(){
     : t("Use my precise location","استخدم موقعي الدقيق");
   document.querySelector(".wa").lastChild.textContent = " " + t("Order on WhatsApp","اطلب على واتساب");
 }
+
+/* ═══════════════════════════════════════════════════════════
+   ✨ Localisation officielle — Bab Al Khair
+   ═══════════════════════════════════════════════════════════ */
+
+const RESTAURANT_LOCATION = {
+  en: {
+    short:    "Al Dhana",
+    full:     "Al Dhana · Adnoc Housing · West Market",
+    landmark: "Near Abu Dhabi Market",
+    country:  "U.A.E"
+  },
+  ar: {
+    short:    "الظفرة",
+    full:     "الظفرة · سكن أدنوك · السوق الغربي",
+    landmark: "بالقرب من سوق أبوظبي",
+    country:  "الإمارات"
+  }
+};
+
+function getLocationText(type) {
+  const loc = RESTAURANT_LOCATION[lang] || RESTAURANT_LOCATION.en;
+  return loc[type] || loc.short;
+}
