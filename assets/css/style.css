@@ -897,3 +897,207 @@ body.rtl{font-family:'Cairo','Inter',sans-serif}
   .fieldGrid{grid-template-columns:1fr}
   .hero h1{font-size:38px}
 }
+/* ═══════════════════════════════════════════════════════════
+   ✨ PATCH 1 — Header oriental premium
+   ═══════════════════════════════════════════════════════════ */
+
+.header-new {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: linear-gradient(180deg, #1a0c05 0%, #0d0603 100%);
+  border-bottom: 1px solid rgba(242, 182, 50, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+/* ─── Motif arabe en fond ─── */
+.header-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  background-image:
+    radial-gradient(circle at 20% 50%, #f2b632 1px, transparent 1px),
+    radial-gradient(circle at 80% 50%, #f2b632 1px, transparent 1px),
+    radial-gradient(circle at 50% 20%, #f2b632 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Fine ligne dorée ─── */
+.header-gold-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(242, 182, 50, 0.3) 20%,
+    #f2b632 50%,
+    rgba(242, 182, 50, 0.3) 80%,
+    transparent 100%
+  );
+}
+
+/* ─── Éléments enfants au-dessus du motif ─── */
+.header-new > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Location button ─── */
+.location-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(242, 182, 50, 0.08);
+  border: 1px solid rgba(242, 182, 50, 0.25);
+  color: var(--cream);
+  padding: 8px 12px;
+  border-radius: 99px;
+  font-weight: 700;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.location-btn:hover {
+  background: rgba(242, 182, 50, 0.15);
+  border-color: rgba(242, 182, 50, 0.5);
+}
+.location-btn svg {
+  width: 13px;
+  height: 13px;
+  stroke: var(--gold);
+  flex-shrink: 0;
+}
+
+/* ─── Brand centered ─── */
+.brand-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.brandCalligraphy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.arabesque {
+  width: 90px;
+  height: 32px;
+  margin-bottom: -2px;
+  filter: drop-shadow(0 2px 8px rgba(242, 182, 50, 0.3));
+}
+
+.brandCenterTitle {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  background: linear-gradient(135deg, #ffd76e 0%, #f2b632 50%, #c8912a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.brandCenterSub {
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: rgba(242, 182, 50, 0.6);
+}
+
+/* ─── Header actions ─── */
+.header-new .headerActions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.header-new .langBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(242, 182, 50, 0.08);
+  border: 1px solid rgba(242, 182, 50, 0.25);
+  color: var(--gold);
+  font-weight: 800;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.header-new .langBtn:hover {
+  background: rgba(242, 182, 50, 0.18);
+}
+.header-new .cartBtn {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffd76e 0%, #f2b632 100%);
+  color: #1a0c05;
+  border: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(242, 182, 50, 0.35);
+  transition: transform 0.2s ease;
+}
+.header-new .cartBtn:hover {
+  transform: scale(1.05);
+}
+.header-new .cartBtn:active {
+  transform: scale(0.95);
+}
+.header-new .cartBtn svg {
+  width: 17px;
+  height: 17px;
+  stroke: #1a0c05;
+}
+.header-new .cartBtn .badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #d93535;
+  color: white;
+  min-width: 19px;
+  height: 19px;
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+  border: 2px solid #0d0603;
+  box-shadow: 0 2px 8px rgba(217, 53, 53, 0.5);
+}
+.header-new .cartBtn .badge.pulse {
+  animation: pulse 0.4s ease;
+}
+
+@media (max-width: 380px) {
+  .location-btn span {
+    display: none;
+  }
+  .arabesque {
+    width: 70px;
+  }
+  .brandCenterTitle {
+    font-size: 11px;
+  }
+}
