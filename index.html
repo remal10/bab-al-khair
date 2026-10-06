@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bab Al Khair — Menu</title>
+<style>
+:root{
+  --bg:#170b06;--panel:#28130b;--cream:#fff7e9;--gold:#f2b632;
+  --muted:#d7c4ad;--green:#25D366;--line:#4b2a18;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:linear-gradient(180deg,#120805,#261108);
+  color:var(--cream);font-family:Inter,system-ui,Arial,sans-serif;
+}
+.app{max-width:520px;margin:auto;min-height:100vh;padding-bottom:92px}
+
+/* ---------- HEADER ---------- */
+header{
+  position:sticky;top:0;z-index:5;background:rgba(18,8,5,.94);
+  backdrop-filter:blur(12px);display:flex;align-items:center;
+  justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);
+}
+.logo{width:118px;height:76px;object-fit:contain;border-radius:10px}
+.cartBtn{
+  border:0;background:var(--gold);color:#211006;border-radius:999px;
+  padding:10px 16px;font-weight:800;font-size:15px;cursor:pointer;
+}
+
+/* ---------- HERO ---------- */
+.hero{
+  margin:14px;border-radius:24px;overflow:hidden;position:relative;
+  background:#32170c;min-height:200px;box-shadow:0 18px 40px #0008;
+}
+.hero img{width:100%;height:260px;object-fit:cover;opacity:.72}
+.heroText{
+  position:absolute;inset:0;padding:24px;display:flex;flex-direction:column;
+  justify-content:flex-end;background:linear-gradient(180deg,#12080524 10%,#12080570 52%,#120805f2 100%);
+}
+.hero h1{font-size:34px;line-height:1;margin:0 0 8px}
+.hero h1 span{color:var(--gold)}
+.hero p{margin:0;color:#f2e2ce;font-size:14px}
+
+/* ---------- SEARCH ---------- */
+.search{margin:14px;display:flex;gap:8px}
+input.searchInput{
+  width:100%;padding:14px;border-radius:14px;border:1px solid #68412c;
+  background:#fff;color:#22120a;font-size:16px;
+}
+
+/* ---------- CHIPS ---------- */
+.chips{display:flex;gap:8px;overflow:auto;padding:0 14px 8px}
+.chip{
+  white-space:nowrap;border:1px solid #68412c;background:#2a140b;
+  color:#fff1dc;border-radius:999px;padding:9px 14px;cursor:pointer;font-size:14px;
+}
+.chip.active{background:var(--gold);color:#211006;border-color:var(--gold);font-weight:800}
+
+/* ---------- GRILLE ---------- */
+h2{padding:0 14px;margin:16px 0 10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 14px}
+.card{
+  background:#fff8ed;color:#25130b;border-radius:18px;overflow:hidden;
+  box-shadow:0 8px 20px #0005;display:flex;flex-direction:column;
+}
+.card img{width:100%;height:130px;object-fit:cover;background:#3b1b0e}
+.card .p{padding:10px;flex:1;display:flex;flex-direction:column}
+.name{font-weight:850;min-height:40px;font-size:15px;line-height:1.2}
+.cat{font-size:11px;color:#82644e;margin-top:3px}
+.row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:9px}
+.price{color:#d57800;font-weight:900;font-size:15px}
+.add{
+  width:38px;height:38px;border:0;border-radius:50%;background:var(--gold);
+  font-size:22px;font-weight:900;cursor:pointer;color:#211006;
+}
+
+/* ---------- DRAWER PANIER ---------- */
+.drawer{
+  position:fixed;z-index:20;inset:0;background:#0009;display:none;align-items:flex-end;
+}
+.drawer.open{display:flex}
+.sheet{
+  width:min(520px,100%);max-height:92vh;overflow:auto;margin:auto;
+  background:#fff8ed;color:#241208;border-radius:24px 24px 0 0;padding:18px;
+}
+.sheetTop{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.sheetTop h3{margin:0;font-size:20px}
+.close{
+  border:0;background:#eee0ce;border-radius:50%;width:38px;height:38px;
+  font-size:20px;cursor:pointer;
+}
+.line{
+  display:grid;grid-template-columns:1fr auto;gap:8px;
+  border-bottom:1px solid #ead9c5;padding:12px 0;
+}
+.line .lname{font-weight:700;font-size:14px}
+.line .lprice{font-size:13px;color:#82644e;margin-top:2px}
+.qty{display:flex;gap:8px;align-items:center}
+.qty button{
+  border:0;border-radius:8px;padding:6px 11px;font-weight:900;
+  background:#f0e2cf;cursor:pointer;font-size:15px;
+}
+.total{display:flex;justify-content:space-between;font-size:22px;font-weight:900;padding:16px 0}
+.delivery{display:grid;gap:9px;margin-top:6px}
+.delivery label{font-size:13px;font-weight:700;color:#5a3c28}
+.delivery input{
+  padding:13px;border-radius:12px;border:1px solid #d8c3a8;font-size:15px;
+}
+.loc{
+  border:0;background:#172d3c;color:white;border-radius:12px;
+  padding:13px;font-weight:800;cursor:pointer;font-size:14px;
+}
+.wa{
+  width:100%;border:0;background:var(--green);color:white;border-radius:14px;
+  padding:16px;font-size:17px;font-weight:900;margin-top:12px;cursor:pointer;
+}
+.note{font-size:12px;color:#7d6757;margin-top:10px;line-height:1.4}
+.empty{padding:24px 0;color:#775f4d;text-align:center}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- HEADER -->
+  <header>
+    <img class="logo" src="logo.jpg" alt="Bab Al Khair">
+    <button class="cartBtn" onclick="openCart()">🛒 Panier <span id="count">0</span></button>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800" alt="Bab Al Khair">
+    <div class="heroText">
+      <h1>Bab Al <span>Khair</span></h1>
+      <p>Saveurs authentiques · Commande directe sur WhatsApp</p>
+    </div>
+  </section>
+
+  <!-- RECHERCHE -->
+  <div class="search">
+    <input class="searchInput" id="search" placeholder="🔍 Rechercher un plat ou un jus…" oninput="render()">
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="chips" id="chips"></div>
+
+  <!-- GRILLE ARTICLES -->
+  <h2>Notre Menu</h2>
+  <div class="grid" id="grid"></div>
+
+</div>
+
+<!-- PANIER -->
+<div class="drawer" id="drawer" onclick="if(event.target===this)closeCart()">
+  <div class="sheet">
+    <div class="sheetTop">
+      <h3>🛒 Votre Panier</h3>
+      <button class="close" onclick="closeCart()">✕</button>
+    </div>
+    <div id="cartItems"></div>
+    <div class="total"><span>Total</span><span id="total">0 AED</span></div>
+
+    <div class="delivery">
+      <label>📍 Nom de l'immeuble / Appartement</label>
+      <input id="building" placeholder="Ex : Tour Al Noor, Apt 1204">
+      <button class="loc" onclick="getLocation()">📍 Utiliser ma position</button>
+    </div>
+
+    <button class="wa" onclick="sendWhatsApp()">📲 Commander sur WhatsApp</button>
+    <p class="note">Votre commande sera envoyée directement au restaurant via WhatsApp.</p>
+  </div>
+</div>
+
+<script>
+/* =====================
+   DONNÉES DES ARTICLES (20+)
+===================== */
+const ARTICLES = [
+  // ---- PLATS (10) ----
+  {id:1,  name:"Mandi Poulet",          cat:"Plats",   price:35, img:"https://images.unsplash.com/photo-1633945274405-b6c8069047b0?w=400"},
+  {id:2,  name:"Mandi Agneau",          cat:"Plats",   price:55, img:"https://images.unsplash.com/photo-1544025162-d76694265947?w=400"},
+  {id:3,  name:"Kabsa Poulet",          cat:"Plats",   price:32, img:"https://images.unsplash.com/photo-1596797038530-2c107229654b?w=400"},
+  {id:4,  name:"Kabsa Agneau",          cat:"Plats",   price:52, img:"https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400"},
+  {id:5,  name:"Machboos Crevettes",    cat:"Plats",   price:48, img:"https://images.unsplash.com/photo-1559737558-2f5a35f4523b?w=400"},
+  {id:6,  name:"Shawarma Poulet",       cat:"Plats",   price:15, img:"https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=400"},
+  {id:7,  name:"Shawarma Bœuf",         cat:"Plats",   price:18, img:"https://images.unsplash.com/photo-1561651823-34feb02250e4?w=400"},
+  {id:8,  name:"Burger Bab Al Khair",   cat:"Plats",   price:28, img:"https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400"},
+  {id:9,  name:"Grillades Mixtes",      cat:"Plats",   price:65, img:"https://images.unsplash.com/photo-1544025162-d76694265947?w=400"},
+  {id:10, name:"Poisson Grillé",        cat:"Plats",   price:50, img:"https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400"},
+
+  // ---- JUS (10) ----
+  {id:11, name:"Jus d'Orange frais",    cat:"Jus",     price:12, img:"https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400"},
+  {id:12, name:"Jus de Mangue",         cat:"Jus",     price:15, img:"https://images.unsplash.com/photo-1605027990121-cbae9e0642df?w=400"},
+  {id:13, name:"Jus de Grenade",        cat:"Jus",     price:18, img:"https://images.unsplash.com/photo-1615478503562-ec2d8aa0e24e?w=400"},
+  {id:14, name:"Jus d'Avocat",          cat:"Jus",     price:20, img:"https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=400"},
+  {id:15, name:"Jus de Fraise",         cat:"Jus",     price:14, img:"https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400"},
+  {id:16, name:"Citronnade à la menthe",cat:"Jus",     price:10, img:"https://images.unsplash.com/photo-1621263764928-df1444c5e859?w=400"},
+  {id:17, name:"Jus de Carotte",        cat:"Jus",     price:11, img:"https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400"},
+  {id:18, name:"Jus de Pomme",          cat:"Jus",     price:13, img:"https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=400"},
+  {id:19, name:"Cocktail Tropical",     cat:"Jus",     price:22, img:"https://images.unsplash.com/photo-1546171753-97d7676e4602?w=400"},
+  {id:20, name:"Jus de Pastèque",       cat:"Jus",     price:12, img:"https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400"},
+
+  // ---- ENTRÉES (3) ----
+  {id:21, name:"Houmous",               cat:"Entrées", price:15, img:"https://images.unsplash.com/photo-1637949385162-e416fb15b2ce?w=400"},
+  {id:22, name:"Salade Fattouche",      cat:"Entrées", price:18, img:"https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400"},
+  {id:23, name:"Sambousek",             cat:"Entrées", price:14, img:"https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400"},
+
+  // ---- DESSERTS (3) ----
+  {id:24, name:"Kunafa",                cat:"Desserts",price:20, img:"https://images.unsplash.com/photo-1579372786545-d24232daf58c?w=400"},
+  {id:25, name:"Umm Ali",               cat:"Desserts",price:18, img:"https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400"},
+  {id:26, name:"Crème Caramel",         cat:"Desserts",price:15, img:"https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400"},
+];
+
+/* =====================
+   ÉTAT
+===================== */
+let activeCat = "Tout";
+let cart = {}; // { id: qty }
+const WHATSAPP = "971561314938"; // +971 056 131 4938
+
+/* =====================
+   CATÉGORIES
+===================== */
+const CATS = ["Tout","Plats","Jus","Entrées","Desserts"];
+
+function renderChips(){
+  const el = document.getElementById("chips");
+  el.innerHTML = CATS.map(c =>
+    `<button class="chip ${c===activeCat?'active':''}" onclick="setCat('${c}')">${c}</button>`
+  ).join("");
+}
+function setCat(c){ activeCat = c; renderChips(); render(); }
+
+/* =====================
+   GRILLE
+===================== */
+function render(){
+  const q = (document.getElementById("search").value || "").toLowerCase();
+  const el = document.getElementById("grid");
+  const list = ARTICLES.filter(a =>
+    (activeCat === "Tout" || a.cat === activeCat) &&
+    a.name.toLowerCase().includes(q)
+  );
+  if(!list.length){ el.innerHTML = `<p class="empty" style="grid-column:1/-1">Aucun article trouvé</p>`; return; }
+  el.innerHTML = list.map(a => `
+    <div class="card">
+      <img src="${a.img}" alt="${a.name}" loading="lazy">
+      <div class="p">
+        <div class="name">${a.name}</div>
+        <div class="cat">${a.cat}</div>
+        <div class="row">
+          <div class="price">${a.price} AED</div>
+          <button class="add" onclick="addItem(${a.id})">+</button>
+        </div>
+      </div>
+    </div>
+  `).join("");
+}
+
+/* =====================
+   PANIER
+===================== */
+function addItem(id){
+  cart[id] = (cart[id] || 0) + 1;
+  updateCart();
+}
+function changeQty(id, delta){
+  cart[id] = (cart[id] || 0) + delta;
+  if(cart[id] <= 0) delete cart[id];
+  updateCart();
+}
+function updateCart(){
+  const count = Object.values(cart).reduce((s,n)=>s+n,0);
+  document.getElementById("count").textContent = count;
+
+  const items = document.getElementById("cartItems");
+  const keys = Object.keys(cart);
+  if(!keys.length){
+    items.innerHTML = `<p class="empty">Votre panier est vide</p>`;
+    document.getElementById("total").textContent = "0 AED";
+    return;
+  }
+  let total = 0;
+  items.innerHTML = keys.map(id => {
+    const a = ARTICLES.find(x => x.id === +id);
+    const qty = cart[id];
+    total += a.price * qty;
+    return `
+      <div class="line">
+        <div>
+          <div class="lname">${a.name}</div>
+          <div class="lprice">${a.price} AED × ${qty} = ${a.price*qty} AED</div>
+        </div>
+        <div class="qty">
+          <button onclick="changeQty(${id},-1)">−</button>
+          <span>${qty}</span>
+          <button onclick="changeQty(${id},+1)">+</button>
+        </div>
+      </div>`;
+  }).join("");
+  document.getElementById("total").textContent = total + " AED";
+}
+
+function openCart(){ document.getElementById("drawer").classList.add("open"); }
+function closeCart(){ document.getElementById("drawer").classList.remove("open"); }
+
+/* =====================
+   GÉOLOCALISATION
+===================== */
+function getLocation(){
+  if(!navigator.geolocation){ alert("Géolocalisation non supportée"); return; }
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      const {latitude, longitude} = pos.coords;
+      document.getElementById("building").value =
+        `Lat ${latitude.toFixed(5)}, Lng ${longitude.toFixed(5)}`;
+    },
+    () => alert("Impossible d'obtenir votre position. Entrez le nom de l'immeuble manuellement.")
+  );
+}
+
+/* =====================
+   WHATSAPP
+===================== */
+function sendWhatsApp(){
+  const keys = Object.keys(cart);
+  if(!keys.length){ alert("Votre panier est vide !"); return; }
+
+  const building = document.getElementById("building").value.trim();
+  if(!building){ alert("Veuillez indiquer le nom de l'immeuble / appartement."); return; }
+
+  let msg = "🍽️ *Nouvelle commande – Bab Al Khair*\n\n";
+  let total = 0, i = 1;
+  keys.forEach(id => {
+    const a = ARTICLES.find(x => x.id === +id);
+    const qty = cart[id];
+    const sub = a.price * qty;
+    total += sub;
+    msg += `${i++}. ${a.name} x${qty} — ${sub} AED\n`;
+  });
+  msg += `\n*Total : ${total} AED*\n\n`;
+  msg += `📍 Immeuble : ${building}`;
+
+  const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+  window.open(url, "_blank");
+}
+
+/* =====================
+   INIT
+===================== */
+renderChips();
+render();
+updateCart();
+</script>
+</body>
+</html>
