@@ -93,9 +93,10 @@ function switchTab(tab) {
   }
 }
 
-/* ===================== WELCOME TOAST ===================== */
+/* ===================== WELCOME TOAST (EN HAUT) ===================== */
 /* ✨ Apparaît UNIQUEMENT après la 1ère interaction utilisateur
-   → Ne bloque JAMAIS la bottom nav au chargement */
+   → EN HAUT de l'écran (classe "welcome")
+   → Ne touche JAMAIS la bottom nav */
 
 let welcomeShown = false;
 
@@ -108,13 +109,27 @@ function showWelcomeOnce() {
       ? (RESTAURANT_LOCATION[lang] || RESTAURANT_LOCATION.en)
       : { short: 'Al Dhana' };
 
-    showToast(t(
+    const el = $("toast");
+    if (!el) return;
+
+    // Position HAUT pour le welcome
+    el.classList.add("welcome");
+    $("toastText").textContent = t(
       `Welcome to Bab Al Khair · ${loc.short}`,
       `أهلاً بك في باب الخير · ${loc.short}`
-    ));
+    );
+    el.classList.add("show");
+
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      el.classList.remove("show");
+      // Retirer "welcome" après disparition
+      setTimeout(() => el.classList.remove("welcome"), 400);
+    }, 2600);
   }, 800);
 }
 
+// Déclenche après la 1ère interaction utilisateur UNIQUEMENT
 document.addEventListener('click', showWelcomeOnce, { once: true });
 document.addEventListener('touchstart', showWelcomeOnce, { once: true });
 
