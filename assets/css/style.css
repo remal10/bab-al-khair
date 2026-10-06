@@ -1187,3 +1187,120 @@ function renderChips(){
     width: 130px;
   }
 }
+/* ═══════════════════════════════════════════════════════════
+   ✨ PATCH 4 — Polish oriental général
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── Typo arabe premium ─── */
+body.rtl .heroTitleEn,
+body.rtl .brandCenterTitle {
+  font-family: 'Cairo', sans-serif;
+  letter-spacing: 0;
+}
+
+body.rtl .sectionHead h2 {
+  font-family: 'Cairo', sans-serif;
+  font-weight: 900;
+}
+
+/* ─── Couleurs plus chaudes ─── */
+.sectionHead h2 em {
+  background: linear-gradient(135deg, #ffd76e, #f2b632);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-style: italic;
+}
+
+/* ─── Bordure décorative sur le Cart sheet ─── */
+.sheet::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  border: 1px solid rgba(242, 182, 50, 0.08);
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sheet > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Badges produits orientaux ─── */
+.cardBadge {
+  background: linear-gradient(135deg, rgba(13, 6, 3, 0.9), rgba(26, 12, 5, 0.9));
+  border: 1px solid rgba(242, 182, 50, 0.4);
+  color: #ffd76e;
+  font-weight: 900;
+  box-shadow: 0 4px 12px rgba(242, 182, 50, 0.25);
+}
+
+/* ─── Toast oriental ─── */
+.toast {
+  background: linear-gradient(135deg, #1a0c05, #2f170d);
+  border: 1px solid rgba(242, 182, 50, 0.4);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(242, 182, 50, 0.15);
+}
+
+/* ─── Bottom nav oriental ─── */
+.bottomNav {
+  background: linear-gradient(180deg, rgba(13, 6, 3, 0.95), rgba(26, 12, 5, 0.98));
+  border-top: 1px solid rgba(242, 182, 50, 0.2);
+}
+
+.navItem.active {
+  color: #ffd76e;
+}
+
+.navItem.active::before {
+  background: linear-gradient(90deg, transparent, #ffd76e, transparent);
+}
+
+/* ─── Bouton WhatsApp oriental ─── */
+.wa {
+  background: linear-gradient(135deg, #25D366 0%, #1aa851 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.wa::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transform: translateX(-100%);
+  animation: shine 3s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0%, 100% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+}
+
+/* ─── Search bar orientale ─── */
+.searchInput:focus {
+  border-color: #f2b632;
+  box-shadow: 0 0 0 4px rgba(242, 182, 50, 0.15), 0 0 30px rgba(242, 182, 50, 0.2);
+}
+
+/* ─── Placeholder arabesque subtile ─── */
+.searchWrap::after {
+  content: '✦';
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(242, 182, 50, 0.3);
+  font-size: 14px;
+  pointer-events: none;
+  transition: color 0.25s ease;
+}
+
+.searchWrap:focus-within::after {
+  color: rgba(242, 182, 50, 0.8);
+}
