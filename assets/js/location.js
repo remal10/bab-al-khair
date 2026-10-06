@@ -30,12 +30,17 @@ async function getLocation(){
         const parts = [
           a.building || a.house_number,
           a.road,
-          a.suburb || a.neighbourhood,
-          a.city || a.town || a.village,
+          a.suburb || a.neighbourhood || a.quarter,
+          a.city || a.town || a.village || a.county || a.state_district,
         ].filter(Boolean);
         addressLine = parts.join(", ");
         if(!addressLine && data.display_name) addressLine = data.display_name;
       } catch(e){}
+
+      // ✨ Fallback Al Dhana
+      if (!addressLine) {
+        addressLine = "Al Dhana, Adnoc Housing, West Market";
+      }
 
       const buildingInput = $("building");
       if(!buildingInput.value && addressLine){
