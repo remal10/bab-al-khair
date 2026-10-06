@@ -923,46 +923,57 @@ function renderChips(){
   flex-shrink: 0;
 }
 
-/* ─── Brand centered ─── */
+/* ═══════════════════════════════════════════════════════════
+   ✨ Header — Logo Bab Al Khair au centre
+   ═══════════════════════════════════════════════════════════ */
+
 .brand-center {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
   text-align: center;
 }
 
-.brandCalligraphy {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
+.brandLogo {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  border-radius: 10px;
+  filter: drop-shadow(0 2px 10px rgba(242, 182, 50, 0.4));
+  flex-shrink: 0;
 }
 
-.arabesque {
-  width: 90px;
-  height: 32px;
-  margin-bottom: -2px;
-  filter: drop-shadow(0 2px 8px rgba(242, 182, 50, 0.3));
+.brandCenterText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  text-align: left;
 }
 
 .brandCenterTitle {
   font-family: 'Playfair Display', serif;
   font-weight: 900;
-  font-size: 13px;
-  letter-spacing: 0.15em;
+  font-size: 14px;
+  letter-spacing: 0.08em;
   background: linear-gradient(135deg, #ffd76e 0%, #f2b632 50%, #c8912a 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  margin-bottom: 2px;
 }
 
 .brandCenterSub {
-  font-size: 7.5px;
+  font-size: 8px;
   font-weight: 700;
   letter-spacing: 0.3em;
-  color: rgba(242, 182, 50, 0.6);
+  color: rgba(242, 182, 50, 0.65);
 }
 
+@media (max-width: 380px) {
+  .brandCenterTitle { font-size: 12px; }
+  .brandLogo { width: 36px; height: 36px; }
+}
 /* ─── Header actions ─── */
 .header-new .headerActions {
   display: flex;
