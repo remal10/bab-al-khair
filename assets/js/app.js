@@ -12,10 +12,53 @@ function showToast(text){
 
 /* ===================== LOADER ===================== */
 
-window.addEventListener("load", () => {
-  setTimeout(() => $("loader").classList.add("hide"), 900);
-});
+/* ═══════════════════════════════════════════════════════════
+   ✨ TRANSITION D'ENTRÉE ORIENTALE + SON (avec interaction)
+   ═══════════════════════════════════════════════════════════ */
 
+let loaderSoundPlayed = false;
+
+function playWelcomeSound() {
+  if (loaderSoundPlayed) return;
+  loaderSoundPlayed = true;
+
+  const sound = $("welcomeSound");
+  if (sound) {
+    sound.volume = 0.4;
+    sound.play().catch(() => {
+      console.log("[Loader] Son non autorisé");
+    });
+  }
+}
+
+window.addEventListener("load", () => {
+  const loader = $("loader");
+
+  // Essayer de jouer immédiatement
+  playWelcomeSound();
+
+  // Fallback : si bloqué, jouer à la 1ère interaction
+  document.addEventListener("click", playWelcomeSound, { once: true });
+  document.addEventListener("touchstart", playWelcomeSound, { once: true });
+
+  // ⏱️ Cache le loader après 4.5 secondes
+  setTimeout(() => {
+    if (loader) loader.classList.add("hide");
+
+    const sound = $("welcomeSound");
+    if (sound) {
+      const fadeOut = setInterval(() => {
+        if (sound.volume > 0.02) {
+          sound.volume -= 0.02;
+        } else {
+          sound.volume = 0;
+          sound.pause();
+          clearInterval(fadeOut);
+        }
+      }, 60);
+    }
+  }, 4500);
+});
 /* ===================== PATCH 1 — Location info ===================== */
 
 function showLocationInfo() {
