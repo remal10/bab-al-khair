@@ -99,12 +99,27 @@ ADDR_FIELDS.forEach(id => {
 
 /* ===================== WELCOME TOAST ===================== */
 
-window.addEventListener("load", () => {
+/* ═══════════════════════════════════════════════════════════
+   ✨ WELCOME TOAST — après interaction (ne bloque PAS la nav)
+   ═══════════════════════════════════════════════════════════ */
+
+let welcomeShown = false;
+
+function showWelcomeOnce() {
+  if (welcomeShown) return;
+  welcomeShown = true;
+
+  // Attendre la fin du loader (4.5s) + petit délai
   setTimeout(() => {
     const loc = RESTAURANT_LOCATION[lang] || RESTAURANT_LOCATION.en;
     showToast(t(
       `Welcome to Bab Al Khair · ${loc.short}`,
       `أهلاً بك في باب الخير · ${loc.short}`
     ));
-  }, 1200);
-});
+  }, 800);
+}
+
+// Déclenche après la 1ère interaction utilisateur UNIQUEMENT
+// → Le toast ne s'affiche pas tant que l'utilisateur ne touche rien
+document.addEventListener('click', showWelcomeOnce, { once: true });
+document.addEventListener('touchstart', showWelcomeOnce, { once: true });
