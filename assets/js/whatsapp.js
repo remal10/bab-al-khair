@@ -20,34 +20,91 @@ function sendWhatsApp(){
     return;
   }
 
-  let msg = `🍽️ *NEW ORDER — Bab Al Khair*\n`;
-  msg += `━━━━━━━━━━━━━━━━━━━\n\n`;
-  msg += `*🧾 ITEMS*\n`;
-  let total = 0, i = 1;
+  // ═══ Calcul du total ═══
+  let total = 0;
   keys.forEach(id => {
     const a = ARTICLES.find(x => x.id === +id);
-    const qty = cart[id];
-    const sub = a.price * qty;
-    total += sub;
-    msg += `${i++}. ${a.name} × ${qty}  →  ${sub} AED\n`;
+    total += a.price * cart[id];
   });
-  msg += `\n━━━━━━━━━━━━━━━━━━━\n`;
-  msg += `💰 *TOTAL : ${total} AED*\n\n`;
 
-  msg += `*📍 DELIVERY ADDRESS*\n`;
-  msg += `🏢 Building : ${building}\n`;
-  if(apt)      msg += `🚪 Apt/Floor : ${apt}\n`;
-  if(landmark) msg += `📌 Landmark : ${landmark}\n`;
-  if(userLocation){
-    msg += `🗺️ GPS : ${userLocation.lat.toFixed(5)}, ${userLocation.lng.toFixed(5)}\n`;
-    msg += `🔗 Map : https://maps.google.com/?q=${userLocation.lat},${userLocation.lng}\n`;
+  const loc = RESTAURANT_LOCATION[lang] || RESTAURANT_LOCATION.en;
+
+  // ═══ Message WhatsApp — Style mockup ═══
+  let msg = "";
+
+  if (lang === "ar") {
+    msg += `👋 مرحبًا مطعم باب الخير!\n`;
+    msg += `أود تقديم طلب. 🍽️\n\n`;
+
+    msg += `🛒 *طلبي:*\n`;
+    let i = 1;
+    keys.forEach(id => {
+      const a = ARTICLES.find(x => x.id === +id);
+      const qty = cart[id];
+      const sub = a.price * qty;
+      msg += `${i++}. ${a.nameAr || a.name} × ${qty} → ${sub} د.إ\n`;
+    });
+
+    msg += `\n💰 *المجموع: ${total} د.إ*\n\n`;
+
+    msg += `🚚 *تفاصيل التوصيل:*\n`;
+    msg += `• المبنى: ${building}\n`;
+    if(apt)      msg += `• الشقة / الطابق: ${apt}\n`;
+    if(landmark) msg += `• علامة مميزة: ${landmark}\n`;
+
+    msg += `\n📍 *موقعي:*\n`;
+    if(userLocation){
+      msg += `https://maps.google.com/?q=${userLocation.lat},${userLocation.lng}\n`;
+    } else {
+      msg += `[سيتم مشاركة رابط خرائط جوجل]\n`;
+    }
+
+    msg += `\n📱 *التواصل:*\n`;
+    msg += `الهاتف: ${phone}\n`;
+
+    msg += `\n✅ يرجى تأكيد طلبي والتوصيل.\n`;
+    msg += `شكرًا لك! 😊\n`;
+
+  } else {
+    msg += `👋 Hello Bab Al Khair Restaurant!\n`;
+    msg += `I would like to place an order. 🍽️\n\n`;
+
+    msg += `🛒 *MY ORDER:*\n`;
+    let i = 1;
+    keys.forEach(id => {
+      const a = ARTICLES.find(x => x.id === +id);
+      const qty = cart[id];
+      const sub = a.price * qty;
+      msg += `${i++}. ${a.name} × ${qty} → AED ${sub}\n`;
+    });
+
+    msg += `\n💰 *Total: AED ${total}*\n\n`;
+
+    msg += `🚚 *Delivery Details:*\n`;
+    msg += `• Building / Villa: ${building}\n`;
+    if(apt)      msg += `• Apartment / Floor: ${apt}\n`;
+    if(landmark) msg += `• Landmark: ${landmark}\n`;
+
+    msg += `\n📍 *My Location:*\n`;
+    if(userLocation){
+      msg += `https://maps.google.com/?q=${userLocation.lat},${userLocation.lng}\n`;
+    } else {
+      msg += `[Google Maps link will be shared]\n`;
+    }
+
+    msg += `\n📱 *Contact:*\n`;
+    msg += `Phone: ${phone}\n`;
+
+    msg += `\n✅ Please confirm my order and delivery.\n`;
+    msg += `Thank you! 😊\n`;
   }
 
-  msg += `\n*📱 CONTACT*\n`;
-  msg += `Phone : ${phone}\n`;
-
-  msg += `\n🕐 ${new Date().toLocaleString()}\n`;
-  msg += `\nThank you for choosing Bab Al Khair 🙏`;
+  // ═══ Signature Bab Al Khair ═══
+  msg += `\n━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `🍽️ *Bab Al Khair Restaurant*\n`;
+  msg += `📍 ${loc.full}\n`;
+  msg += `🏛️ ${loc.landmark}\n`;
+  msg += `🌍 ${loc.country}\n`;
 
   const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
   window.open(url, "_blank");
