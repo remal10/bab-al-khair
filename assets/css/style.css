@@ -759,14 +759,13 @@ body.rtl{font-family:'Cairo','Inter',sans-serif}
   .location-btn span{display:none}
   .brandCenterTitle{font-size:12px}
   .brandLogo{width:36px;height:36px}
-}
-/* ═══════════════════════════════════════════════════════════
-   ✨ WELCOME TOAST — Position HAUT (ne touche PAS la bottom nav)
+}/* ═══════════════════════════════════════════════════════════
+   ✨ WELCOME TOAST — Position HAUT (au-dessus du header)
    ═══════════════════════════════════════════════════════════ */
 
 .toast.welcome {
-  bottom: auto;
-  top: 80px;
+  bottom: auto !important;
+  top: 100px !important;
   transform: translateX(-50%) translateY(-120px);
 }
 
