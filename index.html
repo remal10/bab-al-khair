@@ -404,11 +404,6 @@ header{
 .qty button:hover{background:var(--gold)}
 .qty span{min-width:20px;text-align:center;font-weight:900;font-size:14px}
 
-.subtotalRow{
-  display:flex;justify-content:space-between;
-  padding:18px 0 8px;font-size:15px;color:#4a3324;
-}
-.subtotalRow strong{color:#1a0c05}
 .grandTotal{
   display:flex;justify-content:space-between;align-items:center;
   padding:14px 18px;margin:8px 0 20px;
@@ -420,31 +415,96 @@ header{
 }
 .grandTotal small{font-size:12px;opacity:.7;font-family:'Inter',sans-serif}
 
+/* ============ DELIVERY ============ */
 .delivery{
-  display:grid;gap:10px;margin-top:8px;
-  padding-top:18px;border-top:1px solid #ead9c5;
+  display:grid;gap:14px;margin-top:20px;
+  padding-top:22px;border-top:1px solid #ead9c5;
 }
-.delivery label{
-  font-size:12px;font-weight:800;color:#5a3c28;
-  letter-spacing:.5px;text-transform:uppercase;
+.deliveryHead{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 16px;
+  background:linear-gradient(135deg,#1a0c05,#2f170d);
+  border-radius:16px;color:var(--cream);
 }
-.delivery input{
-  padding:15px 16px;border-radius:14px;
+.deliveryIcon{
+  width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  color:#1a0c05;font-size:22px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.deliveryHead h4{
+  font-family:'Playfair Display',serif;
+  font-size:17px;font-weight:900;color:var(--gold);
+  margin-bottom:3px;
+}
+.deliveryHead p{font-size:11.5px;color:#c9b39a;opacity:.85}
+
+.loc{
+  border:0;border-radius:16px;
+  background:linear-gradient(135deg,#172d3c,#1f3d52);
+  color:white;padding:16px;font-weight:800;
+  cursor:pointer;font-size:14.5px;font-family:inherit;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:.25s;position:relative;overflow:hidden;
+}
+.loc svg{width:20px;height:20px;stroke:var(--gold);stroke-linecap:round;fill:none}
+.loc:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(23,45,60,.4)}
+.loc:active{transform:scale(.98)}
+.loc.loading{pointer-events:none;opacity:.7}
+.loc.loading svg{animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.locStatus{
+  font-size:12.5px;font-weight:700;
+  padding:0 4px;min-height:0;
+  transition:.3s;
+}
+.locStatus.success{
+  color:#0a7a3d;background:#e5f6ec;
+  padding:12px 14px;border-radius:12px;
+  border-left:4px solid #0a7a3d;
+}
+.locStatus.error{
+  color:#b03030;background:#fdeaea;
+  padding:12px 14px;border-radius:12px;
+  border-left:4px solid #b03030;
+}
+.locStatus:empty{display:none}
+
+.mapPreview{
+  border-radius:16px;overflow:hidden;
+  height:180px;border:2px solid #e0cdb4;
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+  animation:fadeIn .4s;
+}
+.mapPreview iframe{
+  width:100%;height:100%;border:0;
+}
+
+.fieldGrid{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{
+  font-size:11.5px;font-weight:800;
+  color:#5a3c28;letter-spacing:.3px;
+  text-transform:uppercase;
+}
+.field input{
+  padding:14px 15px;border-radius:13px;
   border:1.5px solid #e0cdb4;
-  font-size:15px;font-family:inherit;
+  font-size:14.5px;font-family:inherit;
   background:#fff;color:#1a0c05;
   outline:none;transition:.25s;
+  width:100%;
 }
-.delivery input:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(242,182,50,.15)}
-.loc{
-  border:0;border-radius:14px;
-  background:linear-gradient(135deg,#172d3c,#1f3d52);
-  color:white;padding:15px;font-weight:800;
-  cursor:pointer;font-size:14px;font-family:inherit;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  transition:.25s;
+.field input:focus{
+  border-color:var(--gold);
+  box-shadow:0 0 0 4px rgba(242,182,50,.15);
 }
-.loc:hover{transform:translateY(-1px)}
+.field input::placeholder{color:#b8a590}
+
 .wa{
   width:100%;border:0;border-radius:16px;
   background:linear-gradient(135deg,#25D366,#1aa851);
@@ -464,7 +524,7 @@ header{
 .empty{
   padding:50px 20px;color:#9a7a5f;text-align:center;
 }
-.empty svg{width:64px;height:64px;stroke:#d8c3a8;margin-bottom:14px}
+.empty svg{width:64px;height:64px;stroke:#d8c3a8;margin-bottom:14px;fill:none}
 .empty p{font-size:15px;font-weight:600;margin-bottom:6px;color:#4a3324}
 .empty small{font-size:13px;opacity:.7}
 
@@ -478,9 +538,10 @@ header{
   z-index:200;transition:transform .4s cubic-bezier(.2,.9,.3,1.4);
   border:1px solid var(--line);
   display:flex;align-items:center;gap:10px;
+  max-width:90vw;
 }
 .toast.show{transform:translateX(-50%) translateY(0)}
-.toast svg{width:18px;height:18px;stroke:var(--gold)}
+.toast svg{width:18px;height:18px;stroke:var(--gold);fill:none;flex-shrink:0}
 
 /* ============ FOOTER ============ */
 .footer{
@@ -489,6 +550,12 @@ header{
   border-top:1px solid var(--line);margin-top:20px;
 }
 .footer strong{color:var(--gold);font-family:'Playfair Display',serif;font-style:italic}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:420px){
+  .fieldGrid{grid-template-columns:1fr}
+  .hero h1{font-size:38px}
+}
 </style>
 </head>
 <body>
@@ -565,12 +632,51 @@ header{
     </div>
     <div id="cartItems"></div>
 
+    <!-- ============ DELIVERY / LOCATION ============ -->
     <div class="delivery">
-      <label>📍 Building / Apartment</label>
-      <input id="building" placeholder="e.g. Al Noor Tower, Apt 1204">
-      <button class="loc" onclick="getLocation()">
-        <span>📍</span> Use my location
+      <div class="deliveryHead">
+        <span class="deliveryIcon">📍</span>
+        <div>
+          <h4>Delivery Address</h4>
+          <p>Help us find you fast &amp; fresh</p>
+        </div>
+      </div>
+
+      <button class="loc" id="locBtn" onclick="getLocation()">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round">
+          <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+          <circle cx="12" cy="12" r="7"/>
+          <circle cx="12" cy="12" r="2" fill="currentColor"/>
+        </svg>
+        <span id="locBtnText">Use my precise location</span>
       </button>
+
+      <div class="locStatus" id="locStatus"></div>
+
+      <div class="mapPreview" id="mapPreview" style="display:none">
+        <iframe id="mapFrame" loading="lazy"></iframe>
+      </div>
+
+      <div class="fieldGrid">
+        <div class="field">
+          <label>🏢 Building name *</label>
+          <input id="building" placeholder="e.g. Al Noor Tower" autocomplete="address-line1">
+        </div>
+        <div class="field">
+          <label>🚪 Apt / Villa / Floor</label>
+          <input id="apt" placeholder="e.g. Apt 1204, Floor 12" autocomplete="address-line2">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>📌 Landmark (optional)</label>
+        <input id="landmark" placeholder="e.g. Opposite Carrefour, next to mosque">
+      </div>
+
+      <div class="field">
+        <label>📱 Your phone number *</label>
+        <input id="phone" type="tel" placeholder="+971 50 XXX XXXX" autocomplete="tel">
+      </div>
     </div>
 
     <button class="wa" onclick="sendWhatsApp()">
@@ -583,7 +689,7 @@ header{
 
 <!-- ============ TOAST ============ -->
 <div class="toast" id="toast">
-  <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>
+  <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>
   <span id="toastText">Added to cart</span>
 </div>
 
@@ -638,6 +744,7 @@ let lang = "en";
 let cart = JSON.parse(localStorage.getItem("bak_cart") || "{}");
 let favorites = JSON.parse(localStorage.getItem("bak_fav") || "[]");
 let currentProduct = null;
+let userLocation = null;
 
 /* ===================== HELPERS ===================== */
 const $ = id => document.getElementById(id);
@@ -657,14 +764,15 @@ function toggleLang(){
 
 function updateStaticText(){
   $("search").placeholder = t("Search for a dish or juice…", "ابحث عن طبق أو عصير…");
-  $("search").parentElement.querySelector(".chips");
   document.querySelector(".sectionHead h2").innerHTML = t("Our <em>Menu</em>", "قائمتنا");
-  document.querySelector(".cartBtn").firstElementChild.textContent = "";
-  document.querySelector(".cartBtn").lastElementChild.textContent = "";
   document.querySelector(".hero p").textContent = t(
     "Where every dish tells a story. Order fresh, delivered warm.",
     "حيث يحكي كل طبق قصة. اطلب طازجًا، يوصل ساخنًا."
   );
+  $("locBtnText").textContent = userLocation
+    ? t("Location set ✓","تم تحديد الموقع ✓")
+    : t("Use my precise location","استخدم موقعي الدقيق");
+  document.querySelector(".wa").lastChild.textContent = " " + t("Order on WhatsApp","اطلب على واتساب");
 }
 
 /* ===================== CHIPS ===================== */
@@ -692,7 +800,7 @@ function render(){
     $("grid").innerHTML = `
       <div style="grid-column:1/-1">
         <div class="empty">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round">
+          <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round">
             <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
           </svg>
           <p>${t("No items found","لا توجد نتائج")}</p>
@@ -769,7 +877,7 @@ function openProduct(id){
       <p class="modalDesc">${a.desc}</p>
       <div class="modalFooter">
         <div class="modalPrice">${a.price}<small>AED</small></div>
-        <button class="modalAdd" onclick="addItem(${a.id});closeModal()">Add to Cart</button>
+        <button class="modalAdd" onclick="addItem(${a.id});closeModal()">${t("Add to Cart","أضف إلى السلة")}</button>
       </div>
     </div>`;
   $("modal").classList.add("open");
@@ -803,7 +911,7 @@ function updateCart(pulse){
   if(!keys.length){
     items.innerHTML = `
       <div class="empty">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round">
+        <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round">
           <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
           <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/>
         </svg>
@@ -847,41 +955,154 @@ function updateCart(pulse){
 function openCart(){ $("drawer").classList.add("open"); }
 function closeCart(){ $("drawer").classList.remove("open"); }
 
-/* ===================== GEOLOCATION ===================== */
-function getLocation(){
-  if(!navigator.geolocation){ alert("Geolocation not supported"); return; }
+/* ===================== LOCATION & ADDRESS ===================== */
+async function getLocation(){
+  if(!navigator.geolocation){
+    setLocStatus("error", "❌ Geolocation not supported on this device.");
+    return;
+  }
+
+  const btn = $("locBtn");
+  const btnText = $("locBtnText");
+  btn.classList.add("loading");
+  btnText.textContent = t("Locating…","جارٍ التحديد…");
+  setLocStatus("", "");
+
   navigator.geolocation.getCurrentPosition(
-    pos => {
-      const {latitude,longitude} = pos.coords;
-      $("building").value = `Lat ${latitude.toFixed(5)}, Lng ${longitude.toFixed(5)}`;
-      showToast(t("Location added ✓","تمت إضافة الموقع ✓"));
+    async (pos) => {
+      const lat = pos.coords.latitude;
+      const lng = pos.coords.longitude;
+      const acc = Math.round(pos.coords.accuracy);
+      userLocation = {lat, lng, acc};
+
+      // Reverse geocode → real address via OpenStreetMap (free, no API key)
+      let addressLine = "";
+      try {
+        const res = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`,
+          {headers:{"Accept-Language": lang === "ar" ? "ar" : "en"}}
+        );
+        const data = await res.json();
+        const a = data.address || {};
+        const parts = [
+          a.building || a.house_number,
+          a.road,
+          a.suburb || a.neighbourhood,
+          a.city || a.town || a.village,
+        ].filter(Boolean);
+        addressLine = parts.join(", ");
+        if(!addressLine && data.display_name) addressLine = data.display_name;
+      } catch(e){
+        // silent fail — GPS still works
+      }
+
+      // Auto-fill building field if empty
+      const buildingInput = $("building");
+      if(!buildingInput.value && addressLine){
+        buildingInput.value = addressLine;
+      }
+      saveAddress();
+
+      // Show map preview (OpenStreetMap embed)
+      const delta = 0.003;
+      $("mapFrame").src =
+        `https://www.openstreetmap.org/export/embed.html?bbox=${lng-delta},${lat-delta},${lng+delta},${lat+delta}&layer=mapnik&marker=${lat},${lng}`;
+      $("mapPreview").style.display = "block";
+
+      setLocStatus(
+        "success",
+        `✅ ${t("Position confirmed","تم تأكيد الموقع")} (${t("accuracy","دقة")} ±${acc}m)${addressLine ? " · " + addressLine : ""}`
+      );
+
+      btn.classList.remove("loading");
+      btnText.textContent = t("Location set ✓","تم تحديد الموقع ✓");
+      showToast(t("Location confirmed ✓","تم تأكيد الموقع ✓"));
     },
-    () => alert(t("Unable to get location.","تعذر الحصول على الموقع."))
+    (err) => {
+      btn.classList.remove("loading");
+      btnText.textContent = t("Use my precise location","استخدم موقعي الدقيق");
+      let msg = t("Unable to get your location. Please enter manually.","تعذر الحصول على موقعك. أدخل العنوان يدويًا.");
+      if(err.code === 1) msg = "❌ " + t("Location permission denied.","تم رفض إذن الموقع.");
+      if(err.code === 2) msg = "❌ " + t("Location unavailable.","الموقع غير متاح.");
+      if(err.code === 3) msg = "❌ " + t("Location request timed out.","انتهت مهلة طلب الموقع.");
+      setLocStatus("error", msg);
+    },
+    {enableHighAccuracy:true, timeout:12000, maximumAge:0}
   );
+}
+
+function setLocStatus(type, msg){
+  const el = $("locStatus");
+  el.className = "locStatus" + (type ? " " + type : "");
+  el.textContent = msg;
+}
+
+/* ===================== SAVE / RESTORE ADDRESS ===================== */
+const ADDR_FIELDS = ["building","apt","landmark","phone"];
+
+function saveAddress(){
+  const data = {};
+  ADDR_FIELDS.forEach(id => { const el = $(id); if(el) data[id] = el.value; });
+  localStorage.setItem("bak_address", JSON.stringify(data));
+}
+
+function restoreAddress(){
+  try{
+    const data = JSON.parse(localStorage.getItem("bak_address") || "{}");
+    ADDR_FIELDS.forEach(id => { const el = $(id); if(el && data[id]) el.value = data[id]; });
+  }catch(e){}
 }
 
 /* ===================== WHATSAPP ===================== */
 function sendWhatsApp(){
   const keys = Object.keys(cart);
   if(!keys.length){ showToast(t("Your cart is empty","سلتك فارغة")); return; }
-  const building = $("building").value.trim();
-  if(!building){ showToast(t("Please enter building name","الرجاء إدخال اسم المبنى")); return; }
 
-  let msg = `🍽️ *New Order — Bab Al Khair*\n`;
-  msg += `━━━━━━━━━━━━━━━━━━\n\n`;
+  const building = $("building").value.trim();
+  const apt      = $("apt").value.trim();
+  const landmark = $("landmark").value.trim();
+  const phone    = $("phone").value.trim();
+
+  // Validation
+  if(!building){
+    showToast(t("Please enter building name","أدخل اسم المبنى"));
+    $("building").focus();
+    return;
+  }
+  if(!phone || phone.length < 6){
+    showToast(t("Please enter your phone number","أدخل رقم هاتفك"));
+    $("phone").focus();
+    return;
+  }
+
+  let msg = `🍽️ *NEW ORDER — Bab Al Khair*\n`;
+  msg += `━━━━━━━━━━━━━━━━━━━\n\n`;
+  msg += `*🧾 ITEMS*\n`;
   let total = 0, i = 1;
   keys.forEach(id => {
     const a = ARTICLES.find(x => x.id === +id);
     const qty = cart[id];
     const sub = a.price * qty;
     total += sub;
-    msg += `${i++}. ${a.name} × ${qty}\n   → ${sub} AED\n`;
+    msg += `${i++}. ${a.name} × ${qty}  →  ${sub} AED\n`;
   });
-  msg += `\n━━━━━━━━━━━━━━━━━━\n`;
-  msg += `💰 *Total: ${total} AED*\n\n`;
-  msg += `📍 Building: ${building}\n`;
-  msg += `🕐 ${new Date().toLocaleString()}\n\n`;
-  msg += `Thank you for choosing Bab Al Khair 🙏`;
+  msg += `\n━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `💰 *TOTAL : ${total} AED*\n\n`;
+
+  msg += `*📍 DELIVERY ADDRESS*\n`;
+  msg += `🏢 Building : ${building}\n`;
+  if(apt)      msg += `🚪 Apt/Floor : ${apt}\n`;
+  if(landmark) msg += `📌 Landmark : ${landmark}\n`;
+  if(userLocation){
+    msg += `🗺️ GPS : ${userLocation.lat.toFixed(5)}, ${userLocation.lng.toFixed(5)}\n`;
+    msg += `🔗 Map : https://maps.google.com/?q=${userLocation.lat},${userLocation.lng}\n`;
+  }
+
+  msg += `\n*📱 CONTACT*\n`;
+  msg += `Phone : ${phone}\n`;
+
+  msg += `\n🕐 ${new Date().toLocaleString()}\n`;
+  msg += `\nThank you for choosing Bab Al Khair 🙏`;
 
   const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
   window.open(url, "_blank");
@@ -906,6 +1127,13 @@ window.addEventListener("load", () => {
 renderChips();
 render();
 updateCart();
+restoreAddress();
+
+// Auto-save address fields on input
+ADDR_FIELDS.forEach(id => {
+  const el = $(id);
+  if(el) el.addEventListener("input", saveAddress);
+});
 </script>
 </body>
 </html>
